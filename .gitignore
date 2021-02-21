@@ -1,0 +1,14 @@
+db.sqlite3
+venv/
+.env
+env/
+.idea
+.vs
+.vscode
+tmp
+*.log
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+.DS_Store
