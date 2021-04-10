@@ -24,7 +24,7 @@ def init():
     glEnable(GL_NORMALIZE)
     glShadeModel(GL_SMOOTH)
     glMatrixMode(GL_MODELVIEW)
-    gluLookAt(200, 200, 0, 0, 0, 0, 0, 0, 0.5)
+    gluLookAt(90, 90, 0, 0, 0, 0, 0, 0, 0.5)
     glEnable(GL_TEXTURE_2D)
     glEnable(GL_LIGHT0)
     glEnable(GL_LIGHT1)
@@ -60,41 +60,43 @@ def load(file_name):
 
 def tank():
     glColor3fv((1, 1, 1))
-    glBindTexture(GL_TEXTURE_2D, textura[1])
+    glBindTexture(GL_TEXTURE_2D, 3)
     glBegin(GL_QUADS)
 
     glTexCoord2f(0.0, 0.0)
-    glVertex3f(-40.0, -20.0, 5.0)
-    glTexCoord2f(1.0, 0.0)
-    glVertex3f(40.0, -20.0, 5.0)
-    glTexCoord2f(1.0, 1.0)
-    glVertex3f(40.0, 20.0, 5.0)
-    glTexCoord2f(0.0, 1.0)
-    glVertex3f(-40.0, 20.0, 5.0)
+    glVertex3f(-35.0, -20.0, 5.0)
+    glTexCoord2f(6, 0.0)
+    glVertex3f(35.0, -20.0, 5.0)
+    glTexCoord2f(6, 6)
+    glVertex3f(35.0, 20.0, 5.0)
+    glTexCoord2f(0.0, 6)
+    glVertex3f(-35.0, 20.0, 5.0)
 
     glTexCoord2f(0.0, 0.0)
-    glVertex3f(-40.0, -20.0, -5.0)
-    glTexCoord2f(1.0, 0.0)
-    glVertex3f(40.0, -20.0, -5.0)
-    glTexCoord2f(1.0, 1.0)
-    glVertex3f(40.0, 20.0, -5.0)
-    glTexCoord2f(0.0, 1.0)
-    glVertex3f(-40.0, 20.0, -5.0)
+    glVertex3f(-35.0, -20.0, -5.0)
+    glTexCoord2f(6, 0.0)
+    glVertex3f(35.0, -20.0, -5.0)
+    glTexCoord2f(6, 6)
+    glVertex3f(35.0, 20.0, -5.0)
+    glTexCoord2f(0.0, 6)
+    glVertex3f(-35.0, 20.0, -5.0)
 
     glEnd()
     glPushMatrix()
-    glTranslatef(40, 20, 0)
+    glTranslatef(35, 20, 0)
     glRotatef(90, 90, 0, 0)
-    for i in range(9):
-        glBindTexture(GL_TEXTURE_2D, textura[0])
-        gluCylinder(q, 5, 5, 40, 30, 30)
+    for i in range(8):
+        glBindTexture(GL_TEXTURE_2D, 3)
+        gluCylinder(q, 5, 5, 7, 30, 30)
         circle()
-        glTranslatef(0, 0, 40)
+        glTranslatef(0, 0, 33)
+        glBindTexture(GL_TEXTURE_2D, 3)
+        gluCylinder(q, 5, 5, 7, 30, 30)
+        glTranslatef(0, 0, 7)
         circle()
-        glTranslatef(0, 0, -40)
-        glTranslatef(-10, 0, 0)
+        glTranslatef(-10, 0, -40)
     glPopMatrix()
-
+    glBindTexture(GL_TEXTURE_2D, 2)
     glPushMatrix()
     glBegin(GL_QUADS)
 
@@ -154,7 +156,6 @@ def tank():
     glMaterialfv(GL_FRONT, GL_SPECULAR, (1, 1, 1))
     glMaterialfv(GL_FRONT, GL_SHININESS, 20)
     gluSphere(q, 13, 50, 50)
-    glBindTexture(GL_TEXTURE_2D, textura[0])
     glTranslatef(0, 0, 7)
     glRotatef(90, 0, 90, 0)
     gluCylinder(q, 1.5, 2, 40, 30, 30)
@@ -165,7 +166,7 @@ def circle():
     posx, posy = 0, 0
     sides = 32
     radius = 5
-    glBindTexture(GL_TEXTURE_2D, textura[1])
+    glBindTexture(GL_TEXTURE_2D, 3)
     glBegin(GL_POLYGON)
     for i in range(100):
 
@@ -182,40 +183,29 @@ def ground():
     glBegin(GL_QUADS)
     glTexCoord2f(0.0, 0.0)
     glVertex3f(-1000.0, -1000.0, 0)
-    glTexCoord2f(1.0, 0.0)
+    glTexCoord2f(10.0, 0.0)
     glVertex3f(1000.0, -1000.0, 0)
-    glTexCoord2f(1.0, 1.0)
+    glTexCoord2f(10.0, 10.0)
     glVertex3f(1000.0, 1000.0, 0)
-    glTexCoord2f(0.0, 1.0)
+    glTexCoord2f(0.0, 10.0)
     glVertex3f(-1000.0, 1000.0, 0)
     glEnd()
     glBindTexture(GL_TEXTURE_2D, textura[4])
     gluSphere(q, 2000, 50, 50)
 
-def light():
-    glBindTexture(GL_TEXTURE_2D, textura[2])
-    gluSphere(q, 10, 50, 50)
-
 def redisplay():
 
-    glLightfv(GL_LIGHT1, GL_DIFFUSE, [0.2, 0, 0])
-    glLightfv(GL_LIGHT1, GL_AMBIENT, [0.2, 0, 0])
-    glLightfv(GL_LIGHT1, GL_POSITION, [0.0, 0.0, 0.0, 1])
-
-    glLightfv(GL_LIGHT0, GL_SPECULAR, [1, 0.7, 0])
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, [1, 0.7, 0])
-    glLightfv(GL_LIGHT0, GL_AMBIENT, [1, 0.7, 0])
-    glLightfv(GL_LIGHT0, GL_POSITION, [0.0, 0.0, 0.0, 1])
-    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.001)
+    glLightfv(GL_LIGHT0, GL_SPECULAR, [0.7, 0.7, 0.7])
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.7, 0.7, 0.7])
+    glLightfv(GL_LIGHT0, GL_AMBIENT, [0.7, 0.7, 0.7])
+    glLightfv(GL_LIGHT0, GL_POSITION, [0.0, 10.0, 10.0, 1])
+    glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.01)
     glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.08)
-    light()
-    glTranslatef(0, -50, -100)
     tank()
-    glTranslatef(0,0,-10)
+    glTranslatef(0,0,-12)
     ground()
 
 init()
-
 
 while True:
     for event in pygame.event.get():
@@ -234,20 +224,6 @@ while True:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
     keypress = pygame.key.get_pressed()
-    if keypress[pygame.K_w]:
-        glTranslatef(0, 0, 1)
-    if keypress[pygame.K_s]:
-        glTranslatef(0, 0, -1)
-    if keypress[pygame.K_d]:
-        glTranslatef(-1, 0, 0)
-    if keypress[pygame.K_a]:
-        glTranslatef(1, 0, 0)
-
-    if keypress[pygame.K_DOWN]:
-        glTranslatef(0, 1, 0)
-    if keypress[pygame.K_UP]:
-        glTranslatef(0, -1, 0)
-
     if keypress[pygame.K_1]:
         glDisable(GL_LIGHT0)
     if keypress[pygame.K_2]:
@@ -256,6 +232,27 @@ while True:
         glDisable(GL_TEXTURE_2D)
     if keypress[pygame.K_4]:
         glEnable(GL_TEXTURE_2D)
+
+    if keypress[pygame.K_w]:
+        glTranslatef(0, 0, 1)
+    if keypress[pygame.K_s]:
+        glTranslatef(0, 0, -1)
+    if keypress[pygame.K_d]:
+        glTranslatef(-1, 0, 0)
+    if keypress[pygame.K_a]:
+        glTranslatef(1, 0, 0)
+    if keypress[pygame.K_q]:
+        glTranslatef(0, 1, 0)
+    if keypress[pygame.K_e]:
+        glTranslatef(0, -1, 0)
+    if keypress[pygame.K_UP]:
+        glRotatef(1, -1, 0, 0)
+    if keypress[pygame.K_DOWN]:
+        glRotatef(1, 1, 0, 0)
+    if keypress[pygame.K_LEFT]:
+        glRotatef(1, 0, -1, 0)
+    if keypress[pygame.K_RIGHT]:
+        glRotatef(1, 0, 1, 0)
 
     glRotatef(mouseMove[0] * 0.1, 0.0, 0.1, 0.0)
 
